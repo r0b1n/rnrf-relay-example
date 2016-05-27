@@ -1,0 +1,3 @@
+rootProject.name = 'rnrf_relay_example'
+
+include ':app'

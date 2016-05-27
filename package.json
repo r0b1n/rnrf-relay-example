@@ -1,0 +1,15 @@
+{
+  "name": "rnrf_relay_example",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "dependencies": {
+    "babel-relay-plugin": "0.9.0",
+    "react": "15.0.2",
+    "react-native": "0.26.2",
+    "react-native-router-flux": "^3.26.0",
+    "react-relay": "^0.9.0"
+  }
+}
