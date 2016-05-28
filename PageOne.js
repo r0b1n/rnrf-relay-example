@@ -10,7 +10,6 @@ import { Actions } from 'react-native-router-flux';
 import Relay from 'react-relay';
 
 class PageOne extends Component {
-  renderWi
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'center', padding: 10}}>
