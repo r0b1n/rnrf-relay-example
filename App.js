@@ -76,6 +76,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'stretch',
     backgroundColor: '#F5FCFF',
-    borderWidth: 1,
   },
 });
