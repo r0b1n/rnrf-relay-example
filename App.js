@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -16,16 +10,19 @@ import {
 import Relay from 'react-relay';
 
 Relay.injectNetworkLayer(
-  new Relay.DefaultNetworkLayer('http://localhost:3000/graphql')
+  new Relay.DefaultNetworkLayer('http://localhost:3001/graphql')
 );
 
 import { Reducer } from 'react-native-router-flux';
 
 import { Router, Scene, Actions } from 'react-native-router-flux';
 
-import RelayComponentRenderer from './RelayComponentRenderer';
-import PageOne from './PageOne';
-import PageTwo from './PageTwo';
+import RelayComponentRenderer from 'rnrf-relay-renderer';
+
+import CountriesListScreen from './App/Screens/CountriesListScreen';
+import CountryInfoScreen from './App/Screens/CountryInfoScreen';
+import CityInfoScreen from './App/Screens/CityInfoScreen';
+
 
 const reducerCreate = params=>{
     const defaultReducer = Reducer(params);
@@ -37,23 +34,32 @@ const reducerCreate = params=>{
 
 class App extends Component {
   render() {
-    // return <WebView  source={{uri: 'http://localhost:3000/'}}/>
     return (
-      <Router createReducer={reducerCreate} sceneStyle={{flex: 1}} wrapBy={RelayComponentRenderer}>
+      <Router createReducer={reducerCreate} sceneStyle={{flex: 1}} wrapBy={RelayComponentRenderer()}>
         <Scene key="root">
           <Scene
-            key="pageOne"
-            component={PageOne}
-            title="PageOne"
+            key="Countries"
+            component={CountriesListScreen}
+            title="Countries List"
+            hideNavBar
             initial={true}
             queries={{viewer: () => Relay.QL`query { viewer } `,}}
           />
           
           <Scene
-            key="pageTwo"
-            component={PageTwo}
-            title="PageTwo"
-            queries={{node: () => Relay.QL`query { node(id: $nodeID) } `,}}
+            key="Country"
+            component={CountryInfoScreen}
+            hideNavBar
+            title="Country Info"
+            queries={{viewer: () => Relay.QL`query { viewer } `,}}
+          />
+          
+          <Scene
+            key="City"
+            component={CityInfoScreen}
+            hideNavBar={false}
+            title="City Info"
+            queries={{viewer: () => Relay.QL`query { viewer } `,}}
           />
           
         </Scene>
