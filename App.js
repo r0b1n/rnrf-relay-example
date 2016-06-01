@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -23,7 +17,9 @@ import { Reducer } from 'react-native-router-flux';
 
 import { Router, Scene, Actions } from 'react-native-router-flux';
 
-import RelayComponentRenderer from './RelayComponentRenderer';
+import RelayRenderer from 'rnrf-relay-renderer';
+
+
 import PageOne from './PageOne';
 import PageTwo from './PageTwo';
 
@@ -37,9 +33,8 @@ const reducerCreate = params=>{
 
 class App extends Component {
   render() {
-    // return <WebView  source={{uri: 'http://localhost:3000/'}}/>
     return (
-      <Router createReducer={reducerCreate} sceneStyle={{flex: 1}} wrapBy={RelayComponentRenderer}>
+      <Router createReducer={reducerCreate} sceneStyle={{flex: 1}} wrapBy={RelayRenderer()}>
         <Scene key="root">
           <Scene
             key="pageOne"
