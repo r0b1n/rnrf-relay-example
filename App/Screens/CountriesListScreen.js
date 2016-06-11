@@ -14,7 +14,6 @@ import Relay from 'react-relay';
 
 class PageOne extends Component {
   render() {
-    console.log(this.props);
     return (
       <ScrollView style={{flex: 1, padding: 10, paddingTop: 24}}>
           {this.props.viewer.countries.map(country =>

@@ -26,7 +26,7 @@ class CountryHeadBanner extends Component {
           source={{uri: overlay}}
         />
         <TouchableOpacity onPress={Actions.pop}>
-          <Text style={{position: 'absolute', left: 10, backgroundColor: 'transparent', color: 'blue', bottom: 20, fontSize: 40}}>&lt;</Text>
+          <Text style={{position: 'absolute', left: 10, backgroundColor: 'white', color: 'blue', bottom: 20, fontSize: 20}}>Back</Text>
         </TouchableOpacity>
       </View>
     )

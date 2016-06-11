@@ -19,8 +19,10 @@ import { Router, Scene, Actions } from 'react-native-router-flux';
 
 import RelayComponentRenderer from 'rnrf-relay-renderer';
 
+// screens
 import CountriesListScreen from './App/Screens/CountriesListScreen';
 import CountryInfoScreen from './App/Screens/CountryInfoScreen';
+import CountryCitiesScreen from './App/Screens/CountryCitiesScreen';
 import CityInfoScreen from './App/Screens/CityInfoScreen';
 
 
@@ -31,6 +33,14 @@ const reducerCreate = params=>{
         return defaultReducer(state, action);
     }
 };
+
+class TabIcon extends React.Component {
+  render(){
+    return (
+      <Text style={{color: this.props.selected ? "red" :"black"}}>{this.props.title}</Text>
+    );
+  }
+}
 
 class App extends Component {
   render() {
@@ -45,15 +55,26 @@ class App extends Component {
             initial={true}
             queries={{viewer: () => Relay.QL`query { viewer } `,}}
           />
-          
-          <Scene
-            key="Country"
-            component={CountryInfoScreen}
-            hideNavBar
-            title="Country Info"
-            queries={{viewer: () => Relay.QL`query { viewer } `,}}
-          />
-          
+
+          <Scene key="Country" tabs>
+            <Scene
+              key="CountryInfo"
+              component={CountryInfoScreen}
+              hideNavBar
+              title="Info"
+              queries={{viewer: () => Relay.QL`query { viewer } `,}}
+              icon={TabIcon}
+            />
+            <Scene
+              key="CountryCities"
+              component={CountryCitiesScreen}
+              hideNavBar
+              title="Cities"
+              queries={{viewer: () => Relay.QL`query { viewer } `,}}
+              icon={TabIcon}
+            />
+          </Scene>
+
           <Scene
             key="City"
             component={CityInfoScreen}
@@ -61,7 +82,7 @@ class App extends Component {
             title="City Info"
             queries={{viewer: () => Relay.QL`query { viewer } `,}}
           />
-          
+
         </Scene>
       </Router>
     )

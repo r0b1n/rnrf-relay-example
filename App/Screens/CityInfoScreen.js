@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
@@ -18,10 +19,10 @@ class CityInfoScreen extends Component {
     const city = this.props.viewer.city;
     return (
       <View style={{flex: 1, flexDirection: 'column', paddingTop: 64}}>
-        <View style={{flex: 2}}>
-          <ScrollView style={{flex: 1, flexDirection: 'row'}} horizontal>
+        <View style={{height: 250}}>
+          <ScrollView style={{height: 250}} horizontal>
             {city.images.map(function (image, i) {
-              return <View  key={i}><Image style={{height: 250, width: 400}} source={{uri: `http://localhost:3001${image.url}`}} /></View>;
+              return <View  key={i}><Image style={{height: 250, width: Dimensions.get('window').width - 40}} source={{uri: `http://localhost:3001${image.url}`}} /></View>;
             })}
           </ScrollView>
         </View>

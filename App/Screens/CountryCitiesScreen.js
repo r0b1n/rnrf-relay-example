@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
+  Image,
+  ScrollView,
+  TouchableHighlight,
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
@@ -14,17 +17,13 @@ import CityListItem from '../City/CityListItem';
 
 class CountryInfoScreen extends Component {
   render() {
-    const country = this.props.viewer.country;
     return (
-      <View style={{flex: 1, flexDirection: 'column'}}>
-      
-        <CountryHeadBanner country={country} />
-
-        <View style={{flex: 1, padding: 20, alignItems: 'center'}}>
-          <Text style={{fontSize: 24}}>{country.name}</Text>
-          <Text>{country.description}</Text>
+      <View style={{flex: 1, flexDirection: 'column', marginTop: 24}}>
+        <View style={{flex: 7}}>
+          <ScrollView style={{flex: 1}}>
+            {this.props.viewer.country.cities.map(city => <CityListItem key={city.id} city={city} />)}
+          </ScrollView>
         </View>
-        
       </View>
     )
   }
@@ -38,10 +37,12 @@ export default Relay.createContainer(CountryInfoScreen, {
     viewer: () => Relay.QL`
       fragment on ViewerQueryType {
         country (id: $countryId) {
-          ${CountryHeadBanner.getFragment('country')},
           id,
           name,
-          description,
+          cities {
+            id,
+            ${CityListItem.getFragment('city')}
+          },
         }
       }
     `,
